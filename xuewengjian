@@ -1,0 +1,815 @@
+package wuyuejia;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+import java.sql.*;
+
+ public class Adddialog extends JFrame {
+	 public static final int Width =320;
+	 public static final int Heigth =230;
+	
+	 Button btn,btn2;
+      JTextField jt,jt2,jt3,jt4,jt5,jt6;
+	
+	/*class MyPanel extends JPanel{
+		 Label lb ;
+		
+		MyPanel(String s,JTextField jt){
+			setLayout(new FlowLayout());
+			
+			lb=new Label(s);
+			add(lb);add(jt);
+		}
+		 
+	 }*/
+public Adddialog(){
+		setSize(Width,Heigth);
+		setLocation(820,200);
+		setTitle(new String("����"));
+		setLayout(new FlowLayout());
+		Container con=getContentPane();
+		jt=new JTextField(20);
+		Label lb=new Label("ѧ�ţ�");
+		jt2=new JTextField(20);
+		Label lb2=new Label("������");
+		jt3=new JTextField(20);
+		Label lb3=new Label("�Ա�");
+		jt4=new JTextField(20);
+		Label lb4=new Label("���䣺");
+		jt5=new JTextField(20);
+		Label lb5=new Label("�༶��");
+		jt6=new JTextField(20);
+		Label lb6=new Label("רҵ��");
+		btn=new Button("����");
+		btn.addActionListener(new Enter());
+	    btn2=new Button("ȡ��");
+		/*MyPanel p1=new MyPanel("ѧ�ţ�",jt);
+		MyPanel p2=new MyPanel("������",jt2);
+		MyPanel p3=new MyPanel("�Ա�",jt3);*/
+		add(lb);add(jt);add(lb2);add(jt2);add(lb3);add(jt3);add(lb4);add(jt4);add(lb5);add(jt5);add(lb6);add(jt6);add(btn);add(btn2);
+		
+		
+	}
+class Enter implements ActionListener{
+	
+   public void actionPerformed(ActionEvent e){
+	
+	    Container con=getContentPane();
+	    Adddialog ad= new Adddialog();
+	
+	if(e.getActionCommand().equals("����")){
+		
+	con.setBackground(Color.green);
+		
+		 
+			String sno=jt.getText();
+			String sname=jt2.getText();
+			String ssex=jt3.getText();
+			String sage=jt4.getText();
+			String sclass=jt5.getText();
+			String smajor=jt6.getText();
+			Object str[]={sno,sname,ssex,sage,sclass,smajor};
+			Connection sin=Dbcon.getconnectin();
+			Dbcon.insert(sin, str);
+			JOptionPane.showMessageDialog(null,"���ӳɹ�!","������ʾ",JOptionPane.NO_OPTION );
+	        dispose();
+	   
+	   
+	  }
+ }
+ }
+ }
+
+package wuyuejia;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+import java.sql.*;
+
+ public class Alterdialog extends JFrame {
+	 public static final int Width =320;
+	 public static final int Heigth =230;
+	
+	 Button btn,btn2;
+      JTextField jt,jt2,jt3;
+	
+	/*class MyPanel extends JPanel{
+		 Label lb ;
+		
+		MyPanel(String s,JTextField jt){
+			setLayout(new FlowLayout());
+			
+			lb=new Label(s);
+			add(lb);add(jt);
+		}
+		 
+	 }*/
+public Alterdialog(){
+		setSize(Width,Heigth);
+		setLocation(820,200);
+		setTitle(new String("�޸ģ�"));
+		setLayout(new FlowLayout());
+		Container con=getContentPane();
+		jt=new JTextField(20);
+		Label lb=new Label("ѧ�ţ�");
+		btn=new Button("ȷ��");
+		btn.addActionListener(new Enter());
+	    btn2=new Button("ȡ��");
+		/*MyPanel p1=new MyPanel("ѧ�ţ�",jt);
+		MyPanel p2=new MyPanel("������",jt2);
+		MyPanel p3=new MyPanel("�Ա�",jt3);*/
+		add(lb);add(jt);
+		//add(lb2);add(jt2);add(lb3);add(jt3);
+		add(btn);add(btn2);
+		
+		
+	}
+class Enter implements ActionListener{
+	
+   public void actionPerformed(ActionEvent e){
+	
+	    Container con=getContentPane();
+	    
+	
+	if(e.getActionCommand().equals("ȷ��")){
+		
+	con.setBackground(Color.red);
+		
+	     Connection sin=Dbcon.getconnectin();
+			String sno=jt.getText();
+			try {
+				PreparedStatement stmt;
+				 stmt=sin.prepareStatement("delete from student where sno=?");
+			    stmt.setObject(1,sno);
+				stmt.execute();
+			} catch (SQLException h) {
+				// TODO Auto-generated catch block
+				h.printStackTrace();
+			}
+			dispose();
+			Tianjiadialog tg=new Tianjiadialog();
+			tg.show();
+			
+	   
+	   
+	  }
+     }
+    }
+
+}
+
+package wuyuejia;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+import java.sql.*;
+
+ public class Cxdialog extends JFrame {
+	 public static final int Width =320;
+	 public static final int Heigth =230;
+	
+	 Button btn,btn2;
+      JTextField jt,jt2,jt3;
+	
+	/*class MyPanel extends JPanel{
+		 Label lb ;
+		
+		MyPanel(String s,JTextField jt){
+			setLayout(new FlowLayout());
+			
+			lb=new Label(s);
+			add(lb);add(jt);
+		}
+		 
+	 }*/
+public Cxdialog(){
+		setSize(Width,Heigth);
+		setLocation(820,200);
+		setTitle(new String("��ѯ��"));
+		setLayout(new FlowLayout());
+		Container con=getContentPane();
+		jt=new JTextField(20);
+		Label lb=new Label("ѧ�ţ�");
+		btn=new Button("ȷ��");
+		btn.addActionListener(new Enter());
+	    btn2=new Button("ȡ��");
+		/*MyPanel p1=new MyPanel("ѧ�ţ�",jt);
+		MyPanel p2=new MyPanel("������",jt2);
+		MyPanel p3=new MyPanel("�Ա�",jt3);*/
+		add(lb);add(jt);
+		//add(lb2);add(jt2);add(lb3);add(jt3);
+		add(btn);add(btn2);
+	}
+class Enter implements ActionListener{
+	
+   public void actionPerformed(ActionEvent e){
+	   
+	
+	    Container con=getContentPane();
+	    
+	
+	if(e.getActionCommand().equals("ȷ��")){
+		
+	    con.setBackground(Color.red);
+		
+	     Connection sin=Dbcon.getconnectin();
+			String sno=jt.getText();
+			ResultSet rs=null;
+			PreparedStatement stmt=null;
+			try {		
+				 stmt=sin.prepareStatement("select * from student where sno=?");
+			    stmt.setObject(1,sno);
+				rs=stmt.executeQuery();
+				while(rs.next()){
+				String msg=rs.getString("sno")+"\t"+rs.getString("sname")+"\t"+rs.getString("ssex")+"\t"+rs.getString("sage")+"\t"+rs.getString("sclass")+"\t"+rs.getString("smajor")+"\n";
+				JOptionPane.showMessageDialog(null,msg,"��ѯ�����",JOptionPane.NO_OPTION );
+				}
+			 		//stmt.close();
+			 		//con.close();
+				} catch (SQLException h) {
+					// TODO Auto-generated catch block
+					h.printStackTrace();
+				}
+			}
+		
+	        dispose();
+	  }
+     }
+    }
+
+
+
+package wuyuejia;
+
+import java.sql.*;
+
+import javax.swing.JOptionPane;
+public class Dbcon {
+public final static Connection getconnectin(){
+	Connection con=null;
+	String driver = "com.mysql.jdbc.Driver";
+	String url = "jdbc:mysql://localhost:3306/root?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT";
+    String user = "root";
+	String password = "root";
+	try{
+		//Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		Class.forName(driver);
+	    con=DriverManager.getConnection(url,user,password);
+		con.setCatalog("root");
+	}
+	catch(SQLException sqle){
+	       System.out.println(sqle+"lianjiecuowu");
+	            }
+	    	catch(Exception e){
+	    		System.out.println(e+"diergecuowu");
+	    	}
+	return con;
+}
+//��������
+public final static void insert(Connection con,Object obj[]){
+	PreparedStatement stmt=null;
+	try {
+		stmt=con.prepareStatement("insert into student(sno,sname,ssex,sage,sclass,smajor) values(?,?,?,?,?,?)");
+		stmt.setString(1,obj[0].toString());
+		stmt.setString(2,obj[1].toString());
+		stmt.setString(3,obj[2].toString());
+		stmt.setString(4,obj[3].toString());
+		stmt.setString(5,obj[4].toString());
+		stmt.setString(6,obj[5].toString());
+		stmt.execute();
+	} catch (SQLException e) {
+		JOptionPane.showMessageDialog(null,"shibai","������ʾ",JOptionPane.NO_OPTION );
+	}
+}
+//��ѯ����
+public final static ResultSet query(Connection con){
+	
+	ResultSet rs=null;
+	PreparedStatement stmt=null;
+	try {
+		stmt=con.prepareStatement("select * from student");
+		 rs=stmt.executeQuery();
+		
+ 		
+ 		//stmt.close();
+ 		//con.close();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return rs;
+}
+//ɾ������
+public final static void delete(Connection con,String s){
+	try {
+		PreparedStatement stmt;
+		 stmt=con.prepareStatement("delete from student where sno=?");
+	    stmt.setObject(1,s);
+		stmt.execute();
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	finally{
+	}
+}
+}
+package wuyuejia;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+import java.sql.*;
+
+ public class Deletedialog extends JFrame {
+	 public static final int Width =320;
+	 public static final int Heigth =230;
+	
+	 Button btn,btn2;
+      JTextField jt,jt2,jt3;
+	
+	/*class MyPanel extends JPanel{
+		 Label lb ;
+		
+		MyPanel(String s,JTextField jt){
+			setLayout(new FlowLayout());
+			
+			lb=new Label(s);
+			add(lb);add(jt);
+		}
+		 
+	 }*/
+public Deletedialog(){
+		setSize(Width,Heigth);
+		setLocation(820,200);
+		setTitle(new String("ɾ����"));
+		setLayout(new FlowLayout());
+		Container con=getContentPane();
+		jt=new JTextField(20);
+		Label lb=new Label("ѧ�ţ�");
+		/*jt2=new JTextField(20);
+		Label lb2=new Label("������");
+		jt3=new JTextField(20);
+		Label lb3=new Label("�Ա�");*/
+		btn=new Button("ȷ��");
+		btn.addActionListener(new Enter());
+	    btn2=new Button("ȡ��");
+		/*MyPanel p1=new MyPanel("ѧ�ţ�",jt);
+		MyPanel p2=new MyPanel("������",jt2);
+		MyPanel p3=new MyPanel("�Ա�",jt3);*/
+		add(lb);add(jt);
+		//add(lb2);add(jt2);add(lb3);add(jt3);
+		add(btn);add(btn2);
+		
+		
+	}
+class Enter implements ActionListener{
+	
+   public void actionPerformed(ActionEvent e){
+	
+	    Container con=getContentPane();
+	    
+	
+	if(e.getActionCommand().equals("ȷ��")){
+		
+	con.setBackground(Color.red);
+		
+		
+			String sno=jt.getText();
+			
+			Connection sin=Dbcon.getconnectin();
+			Dbcon.delete(sin, sno);
+			JOptionPane.showMessageDialog(null,"��Ϣɾ���ɹ�!","��Ϣ",JOptionPane.INFORMATION_MESSAGE );
+	        dispose();
+	   
+	   
+	  }
+     }
+    }
+
+}
+package wuyuejia;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
+public class LoginIn extends JFrame{
+ JTextField f1;
+    JTextField f2;
+ JButton b1;
+ JButton b2;
+ String power;//��ʾȨ��
+    String imgePath = "D:/javadong/yi.jpq";
+    JPanel p5;
+    Image img = Toolkit.getDefaultToolkit().createImage(imgePath);
+ LoginIn(){
+  Container cp=getContentPane();
+  
+  
+  
+  Label l1=new Label("�û���");
+  Label l2=new Label("���룺");
+  
+  JPanel p1=new JPanel();
+  JPanel p2=new JPanel();
+  JPanel p3=new JPanel();
+  JPanel p4=new JPanel();
+     p5=new JPanel(){
+           protected  void paintChildren(Graphics g) {
+                g.drawImage(img,0,0,this);
+                super.paintChildren(g);
+            }
+        };
+  
+   f1=new JTextField(15);
+      f2=new JPasswordField(15);
+   b1=new JButton("��¼");
+   b2=new JButton("����");
+        //p1.setBackground(Color.orange);
+  p2.add(l1);
+  p2.add(f1);
+  p2.setBorder(new MatteBorder(0,0,0,0,Color.BLACK));
+  p2.setBackground(Color.ORANGE);
+  p3.add(l2);
+  p3.add(f2);
+  p3.setBackground(Color.ORANGE);
+  p3.setBorder(new MatteBorder(0,0,0,0,Color.BLACK));
+  p4.add(b1);
+  p4.add(b2);
+  p4.setBorder(new MatteBorder(-3,-3,-3,-3,Color.CYAN));
+  p4.setBackground(Color.ORANGE);
+  p5.setLayout(new FlowLayout(FlowLayout.CENTER,20,20));
+  p5.add(p2);
+  p5.add(p3);
+  p5.add(p4);
+  cp.add(p5,BorderLayout.CENTER);
+  
+  b1.addActionListener(new Enter());
+  b2.addActionListener(new ReWrite());
+  addWindowListener(new winClose());
+ }
+ public static void main(String[] args) {
+  LoginIn log=new LoginIn();
+  log.setIconImage(Toolkit.getDefaultToolkit().createImage("E:/eclipse�ļ�//dl.gif"));
+  log.setTitle("XHS_12302");
+  log.setLocation(600,300);
+  log.setSize(297,307);
+  log.setVisible(true);
+ 
+  
+ }
+ class Enter implements ActionListener{
+  @SuppressWarnings("deprecation")                                                                                                                                                                                                                        
+public void actionPerformed(ActionEvent e)
+  {  //LoginIn log=new LoginIn();
+              if((f1.getText()).equals("root")&&(f2.getText()).equals("root"))
+              {
+        JOptionPane.showMessageDialog(null, "��¼�ɹ����û�Ȩ����adimistrator");
+              power="adminstrator";
+              Qframe frame= new Qframe();
+              frame.setIconImage(Toolkit.getDefaultToolkit().createImage("E:/eclipse�ļ�/rjgc/java.gif"));
+              frame.setLocation(400,200);
+        	  frame.resize(500,285);
+        	  frame.show();
+        	 //log.setVisible(false);
+        	 dispose();
+              
+              }
+              else if((f1.getText()).equals("wangtangfu")&&(f2.getText()).equals("123456"))
+              {
+              JOptionPane.showMessageDialog(null, "��¼�ɹ����û�Ȩ����user");
+              power="adminstrator";
+              Qframe frame= new Qframe();
+              frame.setIconImage(Toolkit.getDefaultToolkit().createImage("E:/eclipse�ļ�/rjgc/java.gif"));
+              frame.setLocation(400,200);
+        	  frame.resize(500,285);
+        	  frame.show();
+        	  dispose();
+              }
+        else JOptionPane.showMessageDialog(null, "��¼ʧ�ܣ������µ�¼��");
+  }
+ }
+ class ReWrite implements ActionListener{
+  public void actionPerformed(ActionEvent e)
+  {
+   f1.setText("");
+   f2.setText("");
+   f1.requestFocus();
+  }
+ }
+ class winClose extends WindowAdapter
+ {
+ public void windowClosing(WindowEvent e)
+ {
+    (e.getWindow()).dispose();
+  System.exit(0);
+ }
+ }
+}
+package wuyuejia;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.security.cert.PKIXRevocationChecker.Option;
+
+import javax.swing.*;
+
+import java.sql.*;
+
+ 
+class Qframe extends JFrame implements ActionListener{
+                        
+  JPanel contentPane;
+  BorderLayout borderLayout1=new BorderLayout(5,10);
+  Label prompt;
+  JTextField stm;
+  Button run;
+  public static final TextArea result=new TextArea();
+    
+  public Qframe(){
+	  contentPane=(JPanel)this.getContentPane();
+	  contentPane.setLayout(borderLayout1);
+	  this.setTitle("ѧ����Ϣ����ϵͳ");
+	 
+	  addWindowListener(new WindowAdapter(){
+		  public void windowClosing(WindowEvent e){
+			  System.exit(0);
+		  }
+	  });
+	  prompt =new Label("ִ�����:");
+	  run=new Button("��ʼִ��");
+	  result.setEditable(false);
+	  stm=new JTextField(100);
+	  JPanel option =new JPanel();
+	  Button zenjia=new Button("����(add)");
+	  option.add(zenjia,BorderLayout.NORTH);
+	  zenjia.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				 if(e.getSource()==zenjia){
+					  Adddialog add1= new Adddialog();
+					  add1.setVisible(true);
+				  }
+			}
+		});
+	  zenjia.addActionListener(this);
+	  Button shanchu=new Button("ɾ��(delet)");
+	  option.add(shanchu,BorderLayout.NORTH);
+	 shanchu.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				 if(e.getSource()==shanchu){
+					  Deletedialog dt1=new Deletedialog();
+					  dt1.setVisible(true);
+				  }
+			}
+		});
+	  shanchu.addActionListener(this);
+	  Button xiugai=new Button("�޸�(alter)");
+	  option.add(xiugai,BorderLayout.NORTH);
+	  xiugai.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				 if(e.getSource()==xiugai){
+					 Alterdialog af=new Alterdialog();
+					 af.setVisible(true);
+					
+				  }
+			}
+		});
+	  Button cx=new Button("��ѯ(query)");
+	  option.add(cx,BorderLayout.NORTH);
+	  cx.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				 if(e.getSource()==cx){
+					 Cxdialog cj=new Cxdialog();
+					 cj.show();
+				  }
+			}
+		});
+	 cx.addActionListener(this);
+	  xiugai.addActionListener(this);
+	  Button chaxun=new Button("ˢ��(refresh)");
+	  option.add(chaxun,BorderLayout.NORTH);
+	  chaxun.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				 if(e.getSource()==chaxun){
+					 Connection sin=Dbcon.getconnectin();
+					 ResultSet rs=Dbcon.query(sin);
+					 
+					 try {
+						 result.setText("ˢ�³ɹ�\n\n\n");  //.format("����һ����%1$4d",10)
+						while(rs.next())
+							{
+							     String msg=rs.getString("sno")+"\t"+rs.getString("sname")+"\t"+rs.getString("ssex")+"\t"+rs.getString("sage")+"\t"+rs.getString("sclass")+"\t"+rs.getString("smajor")+"\n";
+							     result.append(msg);
+							}
+						sin.close();
+						rs.close();
+					 }catch(Exception h){ 
+						 h.printStackTrace(); 
+					 }
+				  }
+				
+			}
+		});
+	  chaxun.addActionListener(this);
+	  Button tuichu=new Button("�˳�(quit)"); 
+	  option.add(tuichu,BorderLayout.NORTH);
+	  tuichu.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				 if(e.getSource()==tuichu){
+					 System.exit(0);
+					 }
+				  }
+				
+			
+		});
+	  
+	  
+	  //���沼��
+	  contentPane.add(prompt,BorderLayout.WEST);
+	  contentPane.add(stm,BorderLayout.CENTER);
+	  contentPane.add(run,BorderLayout.EAST);
+	  contentPane.add(result,BorderLayout.SOUTH);
+	  contentPane.add(option,BorderLayout.NORTH);
+	  run.addActionListener(this);
+  }
+  public void actionPerformed(ActionEvent e){
+	  Connection con=null;
+	  Statement st=null;
+	  ResultSet rs=null;
+	  if(e.getSource()==run){
+		  try{
+	    		con=Dbcon.getconnectin();
+	    		//System.out.println("���ӳɹ�");
+	    		String msg1="lianjiechenggong";
+	    		result.setText("���ӳɹ�\n\n\n");
+	    		 
+	    		String yuju=stm.getText();
+	    		st=con.createStatement();
+	    		rs=st.executeQuery(yuju);
+	    		//System.out.println("wangtangfu");
+	    		//result.setText("");
+	    		while(rs.next())
+	    		{
+	    		     String msg=rs.getString("sno")+"\t"+rs.getString("sname")+"\t"+rs.getString("ssex")+"\t"+rs.getString("sage")+"\t"+rs.getString("sclass")+"\t"+rs.getString("smajor")+"\n";
+	    		     result.append(msg);
+	    		}
+	    		
+	    		//System.out.println("�������");
+	    	}catch(SQLException sqle){
+	    		result.setText(sqle+"lianjiecuowu");
+	            //System.out.println(sqle+"lianjiecuowu");
+	            }
+	    	catch(Exception h){
+	    		//result.setText(h.getMessage());
+	    		//System.out.println(h+"diergecuowu");
+	    		h.printStackTrace();
+	    	
+	    	}finally{
+	    		try {
+					rs.close();
+					st.close();
+					con.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	    	}
+	  }
+	 
+  }
+  //@SuppressWarnings("deprecation")
+/*public static void main(String argc[]){
+	  
+	  LoginIn dl=new LoginIn();
+	  dl.show();
+	  
+	  
+	  Qframe frame= new Qframe();
+	  frame.setLocation(400,200);
+	  frame.resize(400,285);
+	  frame.show();
+	 
+  }*/
+
+}
+
+	  
+	  
+
+
+package wuyuejia;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+import java.sql.*;
+
+ public class Tianjiadialog extends JFrame {
+	 public static final int Width =320;
+	 public static final int Heigth =230;
+	
+	 Button btn,btn2;
+      JTextField jt,jt2,jt3,jt4,jt5,jt6;
+	
+	/*class MyPanel extends JPanel{
+		 Label lb ;
+		
+		MyPanel(String s,JTextField jt){
+			setLayout(new FlowLayout());
+			
+			lb=new Label(s);
+			add(lb);add(jt);
+		}
+		 
+	 }*/
+public Tianjiadialog(){
+		setSize(Width,Heigth);
+		setLocation(820,200);
+		setTitle(new String("�������µ���Ϣ��"));
+		
+		setLayout(new FlowLayout());
+		jt=new JTextField(20);
+		
+		Label lb=new Label("ѧ�ţ�");
+		jt2=new JTextField(20);
+		
+		Label lb2=new Label("������");
+		jt3=new JTextField(20);
+		
+		Label lb3=new Label("�Ա�");
+		jt4=new JTextField(20);
+		
+		Label lb4=new Label("���䣺");
+		jt5=new JTextField(20);
+		
+		Label lb5=new Label("�༶��");
+		jt6=new JTextField(20);
+		
+		Label lb6=new Label("רҵ��");
+		btn=new Button("�޸�");
+		btn.addActionListener(new Enter());
+	    btn2=new Button("ȡ��");
+		/*MyPanel p1=new MyPanel("ѧ�ţ�",jt);
+		MyPanel p2=new MyPanel("������",jt2);
+		MyPanel p3=new MyPanel("�Ա�",jt3);*/
+		add(lb);add(jt);add(lb2);add(jt2);add(lb3);add(jt3);
+		add(lb4);add(jt4);add(lb5);add(jt5);add(lb6);add(jt6);
+		add(btn);add(btn2);
+		
+	}
+class Enter implements ActionListener{
+	
+   public void actionPerformed(ActionEvent e){
+	
+	    Container con=getContentPane();
+	
+	if(e.getActionCommand().equals("�޸�")){
+		
+	con.setBackground(Color.blue);
+		
+		
+			String sno=jt.getText();
+			String sname=jt2.getText();
+			String ssex=jt3.getText();
+			String sage=jt4.getText();
+			String sclass=jt5.getText();
+			String smajor=jt6.getText();
+			Object str[]={sno,sname,ssex,sage,sclass,smajor};
+			Connection sin=Dbcon.getconnectin();
+			Dbcon.insert(sin, str);
+			JOptionPane.showMessageDialog(null,"�޸ĳɹ�!","������ʾ",JOptionPane.NO_OPTION );
+	        dispose();
+	   
+	   
+	  }
+ }
+ }
+ }
+
